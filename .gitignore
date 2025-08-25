@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# env 파일 무시 (예: .env, .env.local, .env.development …)
+.env
+.env.*
+# 샘플 파일은 버전관리 허용
+!.env.example

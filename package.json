@@ -13,6 +13,8 @@
     "@hookform/resolvers": "^5.2.1",
     "@tailwindcss/vite": "^4.1.12",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.541.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
@@ -22,7 +24,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
-    "@types/react": "^19.1.10",
+    "@types/navermaps": "^3.9.1",
+    "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
     "@vitejs/plugin-react-swc": "^4.0.1",

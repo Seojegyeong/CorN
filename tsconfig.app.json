@@ -23,11 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* 경로 & 타입 */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "navermaps"] // ← @types/navermaps 사용 시 추가
   },
-  "include": ["src", "vite-env.d.ts", "svg.d.ts"]
+  "include": ["src"] // ← vite-env.d.ts, svg.d.ts를 src 내부로 옮긴 전제
 }
