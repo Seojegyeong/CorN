@@ -192,7 +192,7 @@ export default function SignupPage() {
 
         {/* 하단 링크 */}
         <div className="mt-10 text-center">
-          <Link to="/login" className="text-base underline underline-offset-4">
+          <Link to="/" className="text-base underline underline-offset-4">
             이미 계정이 있으신가요? 로그인
           </Link>
         </div>

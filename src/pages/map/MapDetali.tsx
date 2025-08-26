@@ -1,4 +1,3 @@
-// src/components/map/MapDetail.tsx
 import { useEffect } from "react";
 import { Volume2, Move, Clock, ClockAlert, Pencil, X } from "lucide-react";
 import clsx from "clsx";
