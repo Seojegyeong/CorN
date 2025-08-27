@@ -1,12 +1,14 @@
 import SignalCard from "@/components/signList/SignalCard";
 
+import NoImage from "@/assets/images/noimg.png";
+
 const data = [
   {
     id: 1,
     title: "우리집 앞 신호등",
     address: "서울특별시 성북구 동선동 5가 150-3",
     status: "green" as const,
-    thumbnail: "/images/sample1.jpg",
+    thumbnail: NoImage,
     favorite: true,
   },
   {
@@ -14,7 +16,7 @@ const data = [
     title: "CU 앞 신호등",
     address: "서울특별시 성북구 동선동 5가 150-3",
     status: "red" as const,
-    thumbnail: "/images/sample2.jpg",
+    thumbnail: NoImage,
     favorite: false,
   },
 ];
