@@ -2,10 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "../pages/auth/LoginPage";
 import JoinPage from "../pages/auth/JoinPage";
 import Map from "../pages/map/Map";
+import NearbyList from "@/pages/nearby/NearbyList";
+import Layout from "@/layout/layout";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <LoginPage />,
   },
   {
@@ -14,7 +16,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/map",
-    element: <Map />,
+    element: <Layout />,
+    children: [{ index: true, element: <Map /> }],
+  },
+  {
+    path: "/nearby",
+    element: <Layout />,
+    children: [{ index: true, element: <NearbyList /> }],
   },
 ]);
 

@@ -1,6 +1,5 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
 import Button from "../common/Button";
-import DangerCircle from "@/assets/icons/DangerCircle.svg?react";
 
 type TAuthInputProps = {
   type?: string;
@@ -42,7 +41,7 @@ const AuthInput = forwardRef<HTMLInputElement, TAuthInputProps>(
         {title && (
           <div
             className={`absolute left-2 top-[-8px] z-20 select-none bg-default-gray-100 px-1
-              ${error ? "text-warning" : validation ? "text-primary-green" : "text-default-gray-800"}`}
+              ${error ? "text-red-500" : validation ? "text-primary-green" : "text-default-gray-800"}`}
           >
             {title}
           </div>
@@ -60,7 +59,7 @@ const AuthInput = forwardRef<HTMLInputElement, TAuthInputProps>(
             text-default-gray-800 outline-none ring-0
             ${
               error
-                ? "border-2 border-warning caret-[var(--color-warning)]"
+                ? "border-2 border-red-500"
                 : validation
                   ? "border-2 border-primary-green"
                   : "border border-default-gray-400"
@@ -101,14 +100,10 @@ const AuthInput = forwardRef<HTMLInputElement, TAuthInputProps>(
           <>
             <div
               id={`${title}-error`}
-              className="absolute left-4 top-[62px] select-none text-warning text-[12px]/[1.3]"
+              className="absolute left-4 top-[62px] select-none text-red-500 text-[12px]/[1.3]"
             >
               {errorMessage}
             </div>
-            <DangerCircle
-              fill="#ff517c"
-              className={`absolute ${button || short || validationState ? "right-28" : "right-3"}`}
-            />
           </>
         )}
       </div>
