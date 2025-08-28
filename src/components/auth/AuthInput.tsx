@@ -41,7 +41,7 @@ const AuthInput = forwardRef<HTMLInputElement, TAuthInputProps>(
         {title && (
           <div
             className={`absolute left-2 top-[-8px] z-20 select-none bg-default-gray-100 px-1
-              ${error ? "text-red-500" : validation ? "text-primary-green" : "text-default-gray-800"}`}
+              ${error ? "text-red-500" : validation ? "text-primary-blue" : "text-default-gray-800"}`}
           >
             {title}
           </div>
@@ -61,7 +61,7 @@ const AuthInput = forwardRef<HTMLInputElement, TAuthInputProps>(
               error
                 ? "border-2 border-red-500"
                 : validation
-                  ? "border-2 border-primary-green"
+                  ? "border-2 border-primary-blue"
                   : "border border-default-gray-400"
             }`}
           {...rest}

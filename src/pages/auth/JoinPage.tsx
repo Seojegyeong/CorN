@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 
+import { signupSchema } from "@/utils/validation";
+
 import AuthInput from "@/components/auth/AuthInput";
 import Button from "@/components/common/Button";
 
-import { signupSchema } from "@/utils/validation";
+import Logo from "@/assets/images/logo.png";
 
 type SignupFormValues = z.infer<typeof signupSchema>;
 
@@ -105,11 +107,11 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
-      <div className="mt-15 mx-auto flex max-w-[350px] flex-col items-center px-6 pt-20">
+      <div className="mt-5 mx-auto flex max-w-[350px] flex-col items-center px-6 pt-20">
         {/* 타이틀 */}
-        <h1 className="mb-10 text-[45px] font-extrabold leading-[1.2] text-primary-deepgreen">
-          CORN
-        </h1>
+        <div>
+          <img src={Logo} alt="CorN 로고" className="h-40 w-auto" />
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
           {/* 이메일 + 인증버튼 */}
@@ -181,7 +183,7 @@ export default function SignupPage() {
           {/* 회원가입 버튼 */}
           <Button
             size="middle"
-            variant="green"
+            variant={isValid ? "blue" : "gray"}
             type="submit"
             disabled={!(isValid && codeOk)}
             className="mt-2"

@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { MapPin, Star } from "lucide-react";
 import SignalCard from "@/components/signList/SignalCard";
-import NoImage from "@/assets/images/noimg.png";
+import NoImage from "@/assets/images/NoImg.png";
 
 type Signal = {
   id: number;
@@ -83,7 +83,7 @@ export default function NearbyList() {
 
         {/* 밑줄 */}
         <div
-          className={`absolute bottom-0 w-[50%] h-[3px] bg-primary-green rounded-full transition-all duration-300 ${
+          className={`absolute bottom-0 w-[50%] h-[3px] bg-primary-blue rounded-full transition-all duration-300 ${
             selectedTab === "list" ? "left-0" : "left-1/2"
           }`}
         />
@@ -93,12 +93,12 @@ export default function NearbyList() {
       <div className="flex justify-between items-center px-4 py-3 text-sm text-[#666666]">
         <p>
           내 주변에{" "}
-          <span className="text-primary-green font-bold">
+          <span className="text-primary-blue font-bold">
             {filteredData.length}개
           </span>{" "}
           의 신호등이 있어요
         </p>
-        <div className="flex items-center gap-1 text-primary-green text-sm font-medium">
+        <div className="flex items-center gap-1 text-primary-blue text-sm font-medium">
           <MapPin className="w-4 h-4" />
           <span>성북구 동선동</span>
         </div>

@@ -35,14 +35,14 @@ export default function NavBar() {
               {isActive && (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute inset-0 rounded-full bg-primary-green"
+                  className="absolute inset-0 rounded-full bg-primary-blue "
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               {/* 탭 아이콘 */}
               <Icon
                 className={`relative z-10 h-6 w-6 ${
-                  isActive ? "text-white" : "text-primary-green"
+                  isActive ? "text-white" : "text-primary-blue"
                 }`}
               />
             </Link>

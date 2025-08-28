@@ -3,7 +3,7 @@ import { Volume2, Move, Clock, ClockAlert, Pencil, X } from "lucide-react";
 import clsx from "clsx";
 
 type MapDetailProps = {
-  open: boolean; // ← 열림/닫힘 상태
+  open: boolean;
   title: string;
   content: string;
   onClose: () => void;
@@ -62,7 +62,7 @@ export default function MapDetail({
         </button>
 
         {/* 타이틀 */}
-        <div className="mb-2 flex items-center gap-2">
+        <div className="mb-1 flex items-center gap-2">
           <h2 id="map-detail-title" className="text-lg font-semibold">
             {title}
           </h2>
@@ -70,13 +70,25 @@ export default function MapDetail({
         </div>
 
         {/* 내용 */}
-        <p className="mb-4 text-gray-600">{content}</p>
+        <p className="mb-2 text-gray-600">{content}</p>
 
         {/* 원형 프로그레스바 자리 */}
-        <div>원형 프로그레스바 넣을 예정</div>
+        <div className="flex justify-center items-center mt-4">
+          <div
+            className="w-[100px] h-[100px] flex justify-center items-center transition-all duration-200"
+            style={{
+              background: `conic-gradient(#22c55e 30%, #e6e6e6 0%)`,
+              borderRadius: "50%",
+            }}
+          >
+            <div className="w-[70%] h-[70%] rounded-full bg-white flex justify-center items-center">
+              34:00
+            </div>
+          </div>
+        </div>
 
         {/* 하단 아이콘 4개 */}
-        <div className="mt-10 grid grid-cols-4 gap-4 text-center text-sm text-gray-700">
+        <div className="mt-5 grid grid-cols-4 gap-4 text-center text-sm text-gray-700">
           <div className="flex flex-col items-center">
             <Volume2 className="h-5 w-5 text-blue-500" />
             <span>신호음 지원</span>

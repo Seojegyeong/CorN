@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { loginSchema } from "@/utils/validation";
+import type { z } from "zod";
+
 import AuthInput from "@/components/auth/AuthInput";
 import Button from "@/components/common/Button";
 
-import { loginSchema } from "@/utils/validation";
-import type { z } from "zod";
+import Logo from "@/assets/images/logo.png";
 
 // loginSchema 기반 타입 추출
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -39,11 +41,11 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
-      <div className="mt-15 mx-auto flex max-w-[350px] flex-col items-center px-6 pt-20">
+      <div className="mt-5 mx-auto flex max-w-[350px] flex-col items-center px-6 pt-20">
         {/* 타이틀 */}
-        <h1 className="mb-10 text-[45px] font-extrabold leading-[1.2] text-primary-deepgreen">
-          CORN
-        </h1>
+        <div>
+          <img src={Logo} alt="CorN 로고" className="h-40 w-auto" />
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-7">
           {/* 이메일 입력 */}
@@ -69,8 +71,8 @@ export default function LoginPage() {
           {/* 이메일 로그인 버튼 */}
           <Button
             size="middle"
-            variant="green"
             type="submit"
+            variant={isValid ? "blue" : "gray"}
             disabled={!isValid} // 폼 전체 유효성 검사 결과 반영
             className="mt-4"
           >
@@ -80,9 +82,8 @@ export default function LoginPage() {
           {/* 네이버 로그인 버튼 */}
           <Button
             size="middle"
-            variant="green"
             type="button"
-            className="bg-[#05c462] hover:bg-[#05b45b]"
+            variant="naver"
             onClick={() => console.log("네이버 로그인")}
           >
             <span className="flex items-center gap-2">
