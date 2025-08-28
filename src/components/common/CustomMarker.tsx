@@ -1,17 +1,11 @@
 const CustomMarker = ({
   time,
-  percent,
   color = "#00C471",
 }: {
   time: number;
   percent: number;
   color?: string;
 }) => {
-  const radius = 18;
-  const strokeWidth = 8;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference * (1 - percent); // 진행률 반영
-
   return (
     <div
       style={{
@@ -26,34 +20,18 @@ const CustomMarker = ({
         gap: "6px",
       }}
     >
-      {/* 프로그레스 원형 */}
-      <svg
-        width={2 * (radius + strokeWidth)}
-        height={2 * (radius + strokeWidth)}
-      >
-        <circle
-          cx={radius + strokeWidth}
-          cy={radius + strokeWidth}
-          r={radius}
-          stroke="#e0e0e0"
-          strokeWidth={strokeWidth}
-          fill="none"
-        />
-        <circle
-          cx={radius + strokeWidth}
-          cy={radius + strokeWidth}
-          r={radius}
-          stroke={color}
-          strokeWidth={strokeWidth}
-          fill="none"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          transform={`rotate(-90 ${radius + strokeWidth} ${
-            radius + strokeWidth
-          })`}
-        />
-      </svg>
+      {/* 원형 프로그레스바 자리 */}
+      <div className="flex justify-center items-center">
+        <div
+          className="w-[45px] h-[45px] flex justify-center items-center transition-all duration-200"
+          style={{
+            background: `conic-gradient(#22c55e 30%, #e6e6e6 0%)`,
+            borderRadius: "50%",
+          }}
+        >
+          <div className="w-[60%] h-[60%] rounded-full bg-white flex justify-center items-center"></div>
+        </div>
+      </div>
 
       {/* 텍스트 */}
       <span style={{ fontSize: "20px", fontWeight: 700, color }}>{time}초</span>

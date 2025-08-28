@@ -4,10 +4,15 @@ import JoinPage from "../pages/auth/JoinPage";
 import Map from "../pages/map/Map";
 import NearbyList from "@/pages/nearby/NearbyList";
 import Layout from "@/layout/layout";
+import Splash from "@/pages/splash/Splash";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Splash />,
+  },
+  {
+    path: "/login",
     element: <LoginPage />,
   },
   {

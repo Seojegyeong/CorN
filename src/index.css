@@ -27,10 +27,9 @@ button {
 }
 
 @theme {
+  --color-primary-blue: #02278a;
   --color-primary-red: #ef4444;
-  --color-primary-yellow: #facc15;
   --color-primary-green: #22c55e;
-  --color-primary-deepgreen: #2e8d57;
 
   --color-default-gray-100: #fefefe;
   --color-default-gray-400: #e6e6e6;
@@ -50,10 +49,6 @@ button {
     font-size: 14px;
     font-weight: 500;
     line-height: 140%;
-  }
-
-  .rounding-16 {
-    border-radius: 16px;
   }
 
   .shadow-default {

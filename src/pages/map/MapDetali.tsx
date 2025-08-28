@@ -3,7 +3,7 @@ import { Volume2, Move, Clock, ClockAlert, Pencil, X } from "lucide-react";
 import clsx from "clsx";
 
 type MapDetailProps = {
-  open: boolean; // ← 열림/닫힘 상태
+  open: boolean;
   title: string;
   content: string;
   onClose: () => void;
@@ -26,7 +26,7 @@ export default function MapDetail({
   return (
     <div
       className={clsx(
-        "fixed inset-0 z-[1000]", // z-1000 대신 z-[1000]
+        "fixed inset-0 z-[1000]",
         open ? "pointer-events-auto" : "pointer-events-none"
       )}
       aria-hidden={!open}
@@ -47,7 +47,7 @@ export default function MapDetail({
           "pointer-events-auto transition-transform duration-300",
           open ? "translate-y-0" : "translate-y-full"
         )}
-        style={{ height: "33vh" }} // 화면 1/3
+        style={{ height: "33vh" }}
         role="dialog"
         aria-modal="true"
         aria-labelledby="map-detail-title"
@@ -62,7 +62,7 @@ export default function MapDetail({
         </button>
 
         {/* 타이틀 */}
-        <div className="mb-2 flex items-center gap-2">
+        <div className="mb-1 flex items-center gap-2">
           <h2 id="map-detail-title" className="text-lg font-semibold">
             {title}
           </h2>
@@ -70,30 +70,44 @@ export default function MapDetail({
         </div>
 
         {/* 내용 */}
-        <p className="mb-4 text-gray-600">{content}</p>
+        <p className="mb-2 text-gray-600">{content}</p>
 
         {/* 원형 프로그레스바 자리 */}
-        <div>원형 프로그레스바 넣을 예정</div>
+        <div className="flex justify-center items-center mt-4">
+          <div
+            className="w-[100px] h-[100px] flex justify-center items-center transition-all duration-200"
+            style={{
+              background: `conic-gradient(#22c55e 30%, #e6e6e6 0%)`,
+              borderRadius: "50%",
+            }}
+          >
+            <div className="w-[70%] h-[70%] rounded-full bg-white flex justify-center items-center">
+              34:00
+            </div>
+          </div>
+        </div>
 
         {/* 하단 아이콘 4개 */}
-        <div className="mt-10 grid grid-cols-4 gap-4 text-center text-sm text-gray-700">
-          <div className="flex flex-col items-center">
-            <Volume2 className="h-5 w-5 text-blue-500" />
+        <div className="mt-5 grid grid-cols-4 gap-4 text-center font-body text-gray-700">
+          <div className="flex flex-col items-center justify-end">
+            <Volume2 className="h-5 w-5 mb-1 text-primary-blue" />
             <span>신호음 지원</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Move className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <Move className="h-6 w-6 mb-1 text-primary-blue" />
             <span>보행자 버튼</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Clock className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <Clock className="h-6 w-6 mb-1 text-primary-blue" />
             <span>시작 06:00</span>
           </div>
-          <div className="flex flex-col items-center">
-            <ClockAlert className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <ClockAlert className="h-6 w-6 mb-1 text-primary-blue" />
             <span>종료 23:00</span>
           </div>
         </div>
+
+        {/* justify-end : Flexbox의 메인축(main axis) 에 따라 내용물을 끝쪽(end) 으로 정렬 */}
       </section>
     </div>
   );

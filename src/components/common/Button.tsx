@@ -2,7 +2,7 @@ import cx from "clsx"; // clsx : 여러 개 className 합치는 라이브러리
 
 type ButtonProps = {
   size?: "small" | "middle";
-  variant?: "green" | "gray";
+  variant?: "blue" | "gray" | "naver";
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
@@ -21,22 +21,31 @@ export default function Button({
 }: ButtonProps) {
   // 공통
   const base =
-    "inline-flex items-center justify-center select-none font-medium " +
-    "transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center select-none font-body " +
+    "transition-colors duration-200 disabled:cursor-not-allowed";
 
-  // 스샷 기준 크기
+  // select-none: 텍스트 드래그 방지
+  // transition-colors duration-200: 색상 전환 0.2초
+
+  // 사이즈 프리셋
   const sizeClasses = {
     small: "h-10 px-4 text-sm rounded-md",
     middle: "h-14 w-full text-base rounded-md",
   };
 
+  // varient 별 class 정의
+  // focus-visible:ring-* 로 키보드 포커스 링
   const variantClasses = {
-    green:
-      "bg-primary-green text-white hover:bg-green-600 " +
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-300",
+    blue:
+      "bg-primary-blue text-white  " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue",
     gray:
-      "bg-default-gray-400 text-default-gray-800 hover:bg-default-gray-500 " +
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-default-gray-400/60",
+      "bg-default-gray-400 text-default-gray-800  " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-default-gray-700",
+
+    naver:
+      "bg-[#03C75A] text-white " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green",
   };
 
   return (
