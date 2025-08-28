@@ -26,7 +26,7 @@ export default function MapDetail({
   return (
     <div
       className={clsx(
-        "fixed inset-0 z-[1000]", // z-1000 대신 z-[1000]
+        "fixed inset-0 z-[1000]",
         open ? "pointer-events-auto" : "pointer-events-none"
       )}
       aria-hidden={!open}
@@ -47,7 +47,7 @@ export default function MapDetail({
           "pointer-events-auto transition-transform duration-300",
           open ? "translate-y-0" : "translate-y-full"
         )}
-        style={{ height: "33vh" }} // 화면 1/3
+        style={{ height: "33vh" }}
         role="dialog"
         aria-modal="true"
         aria-labelledby="map-detail-title"
@@ -88,24 +88,26 @@ export default function MapDetail({
         </div>
 
         {/* 하단 아이콘 4개 */}
-        <div className="mt-5 grid grid-cols-4 gap-4 text-center text-sm text-gray-700">
-          <div className="flex flex-col items-center">
-            <Volume2 className="h-5 w-5 text-blue-500" />
+        <div className="mt-5 grid grid-cols-4 gap-4 text-center font-body text-gray-700">
+          <div className="flex flex-col items-center justify-end">
+            <Volume2 className="h-5 w-5 mb-1 text-primary-blue" />
             <span>신호음 지원</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Move className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <Move className="h-6 w-6 mb-1 text-primary-blue" />
             <span>보행자 버튼</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Clock className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <Clock className="h-6 w-6 mb-1 text-primary-blue" />
             <span>시작 06:00</span>
           </div>
-          <div className="flex flex-col items-center">
-            <ClockAlert className="h-6 w-6 text-blue-500" />
+          <div className="flex flex-col items-center justify-end">
+            <ClockAlert className="h-6 w-6 mb-1 text-primary-blue" />
             <span>종료 23:00</span>
           </div>
         </div>
+
+        {/* justify-end : Flexbox의 메인축(main axis) 에 따라 내용물을 끝쪽(end) 으로 정렬 */}
       </section>
     </div>
   );
