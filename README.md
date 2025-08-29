@@ -1,69 +1,15 @@
-# React + TypeScript + Vite
+# 📌 프로젝트명: CorN
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 사용자의 현재 위치를 기반으로 주변 신호등의 신호 상태와 남은 시간을 실시간으로 제공하는 서비스 (React + Naver Map API)
 
-Currently, two official plugins are available:
+## 🔍 소개
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**CorN**은 사용자 주변 횡단보도 신호 상태와 남은 시간을 실시간으로 제공하여, 사용자가 대기 시간을 줄이고 이동 경로를 스마트하게 조정할 수 있도록 돕습니다.
+또한 신호등에 **사용자만의 별명을 붙여 관리**하거나, **자주 이용하는 신호등을 즐겨찾기**할 수 있어, 나만의 맞춤형 신호등 관리가 가능합니다. 이를 통해 사용자는 더욱 직관적이고 개인화된 신호등 정보를 손쉽게 확인할 수 있습니다.
+궁극적으로는 **편리하고 안전한 도보 이동을 지원하고**, 사용자 일상의 불필요한 대기 시간을 줄여 더욱 스마트한 도시 생활을 제공합니다.
 
-## Expanding the ESLint configuration
+## 🛠️ 주요 기능
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 📍 **네이버 맵 기반 신호등 지도**
+- 🧵 **신호등 별명 설정**
+- 💬 **신호등 즐겨찾기 기능**
