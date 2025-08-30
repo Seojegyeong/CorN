@@ -1,48 +1,49 @@
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { loginSchema } from "@/utils/validation";
-import type { z } from "zod";
-
+import type { LoginFormValues } from "@/types/auth/auth";
 import AuthInput from "@/components/auth/AuthInput";
 import Button from "@/components/common/Button";
-
 import Logo from "@/assets/images/logo.png";
 
-// loginSchema 기반 타입 추출
-type LoginFormValues = z.infer<typeof loginSchema>;
-
 export default function LoginPage() {
-  // react-hook-form + zodResolver 세팅
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid },
-    watch,
   } = useForm<LoginFormValues>({
-    mode: "onChange", // 입력할 때마다 검증
-    resolver: zodResolver(loginSchema), // loginSchema 기반 유효성 검사
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    mode: "onChange",
+    resolver: zodResolver(loginSchema),
   });
 
-  // 현재 입력값 가져오기 - 버튼 disabled 제어에 사용
-  const email = watch("email");
-  const password = watch("password");
+  const watchedPassword = useWatch({ control, name: "password" });
+  const watchedEmail = useWatch({ control, name: "email" });
 
-  // 폼 제출 핸들러
-  const onSubmit = (data: LoginFormValues) => {
-    console.log("로그인 데이터", data);
-    // TODO: 실제 로그인 API 연동해야함
+  const onSubmit: SubmitHandler<TLoginFormValues> = async (submitData) => {
+    if (isValid) {
+      loginMutate(
+        {
+          email: submitData.email,
+          password: submitData.password,
+        },
+        {
+          onSuccess: () => {
+            navigate("/map");
+          },
+          onError: (err) => {
+            console.log(err.response?.data.message);
+            setError("잘못된 정보를 입력하였습니다.");
+          },
+        }
+      );
+    }
   };
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
       <div className="mt-5 mx-auto flex max-w-[350px] flex-col items-center px-6 pt-20">
-        {/* 타이틀 */}
         <div>
           <img src={Logo} alt="CorN 로고" className="h-40 w-auto" />
         </div>
@@ -55,7 +56,7 @@ export default function LoginPage() {
             {...register("email")}
             error={!!errors.email}
             errorMessage={errors.email?.message}
-            validation={!!email && !errors.email}
+            validation={!!watchedEmail && !errors.email}
           />
 
           {/* 비밀번호 입력 */}
@@ -65,7 +66,7 @@ export default function LoginPage() {
             {...register("password")}
             error={!!errors.password}
             errorMessage={errors.password?.message}
-            validation={!!password && !errors.password}
+            validation={!!watchedPassword && !errors.password}
           />
 
           {/* 이메일 로그인 버튼 */}
@@ -73,7 +74,7 @@ export default function LoginPage() {
             size="middle"
             type="submit"
             variant={isValid ? "blue" : "gray"}
-            disabled={!isValid} // 폼 전체 유효성 검사 결과 반영
+            disabled={!isValid}
             className="mt-4"
           >
             이메일로 로그인
@@ -95,14 +96,12 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        {/* 구분선 */}
         <div className="mt-15 my-8 flex w-full items-center gap-4 text-default-gray-500">
           <div className="h-[1px] flex-1 bg-default-gray-400/70" />
           <span className="text-sm">또는</span>
           <div className="h-[1px] flex-1 bg-default-gray-400/70" />
         </div>
 
-        {/* 회원가입 링크 */}
         <Link to="/join" className="text-base underline underline-offset-4">
           이메일로 회원가입
         </Link>

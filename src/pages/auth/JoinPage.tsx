@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { z } from "zod";
+import type { SignupFormValues } from "@/types/auth/auth";
 
 import { signupSchema } from "@/utils/validation";
 
@@ -10,8 +10,6 @@ import AuthInput from "@/components/auth/AuthInput";
 import Button from "@/components/common/Button";
 
 import Logo from "@/assets/images/logo.png";
-
-type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
   // 인증메일/코드 관련 로컬 상태 (API 연동 전 임시)
@@ -22,88 +20,87 @@ export default function SignupPage() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid },
-    watch,
-    setError,
-    clearErrors,
   } = useForm<SignupFormValues>({
     mode: "onChange",
     resolver: zodResolver(signupSchema),
-    defaultValues: {
-      // 초기값 세팅 - 빈 문자열로 초기화
-      // useForm을 쓰면 폼 내부 상태(values)를 리액트 훅이 관리
-      // - 초기화 하지않으면 undefined 상태가 될 수 있음
-      email: "",
-      password: "",
-      repassword: "",
-      code: "",
-    },
+  });
+  const watchedPassword = useWatch({
+    control,
+    name: "password",
+  });
+  const watchedEmail = useWatch({
+    control,
+    name: "email",
+  });
+  const watchedCode = useWatch({
+    control,
+    name: "code",
+  });
+  const watchedRepassword = useWatch({
+    control,
+    name: "repassword",
   });
 
-  const email = watch("email");
-  const code = watch("code");
-  const password = watch("password");
-  const repassword = watch("repassword");
-
-  // TODO: 실제 API 연동에 맞춰 교체
-  const handleSendCode = () => {
-    if (!errors.email && email) {
-      setCodeSent(true);
-      setCodeVerified(false);
-      setCodeError("");
-      // 실제로는 이메일로 코드 발송 API 호출
-      console.log("인증코드 발송:", email);
-    } else {
-      setCodeSent(false);
-      setCodeVerified(false);
-      setCodeError("이메일 형식을 확인해 주세요.");
-      setError("email", {
-        type: "manual",
-        message: "올바르지 않은 형식이에요",
-      });
+  const postSendCode = () => {
+    setCodeVerify(false);
+    if (watchedEmail != "" && !errors.email?.message) {
+      sendCodeMutation(
+        {
+          email: watchedEmail,
+        },
+        {
+          onSuccess: () => {
+            setSendCode(true);
+          },
+          onError: () => {
+            setSendCode(false);
+            alert("인증코드 발송 중 에러가 발생하였습니다.");
+          },
+        }
+      );
     }
   };
 
-  // TODO: 실제 API 연동에 맞춰 교체
-  const handleVerifyCode = () => {
-    if (!code) {
-      setCodeVerified(false);
-      setCodeError("인증코드를 입력해 주세요.");
-      setError("code", {
-        type: "manual",
-        message: "인증코드를 입력해 주세요.",
-      });
-      return;
-    }
-    // 예시로 코드가 "123456"이면 성공
-    if (code === "123456") {
-      setCodeVerified(true);
-      setCodeError("");
-      clearErrors("code");
-    } else {
-      setCodeVerified(false);
-      setCodeError("인증번호가 일치하지 않습니다.");
-      setError("code", {
-        type: "manual",
-        message: "인증번호가 일치하지 않습니다.",
-      });
+  const checkCode = () => {
+    if (watchedCode != "" && watchedCode != undefined && sendCode) {
+      checkCodeMutation(
+        {
+          email: watchedEmail,
+          code: watchedCode,
+        },
+        {
+          onSuccess: (data) => {
+            if (data.isSuccess === true) {
+              setCodeVerify(true);
+            } else {
+              setCodeVerify(false);
+            }
+          },
+          onError: () => {
+            setCodeError("인증번호가 일치하지 않습니다.");
+            setCodeVerify(false);
+          },
+        }
+      );
     }
   };
 
-  const onSubmit = (data: SignupFormValues) => {
-    if (!codeVerified) {
-      setCodeError("인증을 완료해 주세요.");
-      setError("code", { type: "manual", message: "인증을 완료해 주세요." });
-      return;
-    }
-    console.log("회원가입 데이터:", data);
-    // TODO: 회원가입 API 연동
+  const onSubmit: SubmitHandler<TFormValues> = async (submitData) => {
+    setEmail(submitData.email);
+    setPassword(submitData.password);
+    navigate("/map");
   };
 
-  const emailOk = !!email && !errors.email;
-  const codeOk = codeSent && codeVerified && !errors.code;
-  const pwdOk = !!password && !errors.password;
-  const repwdOk = !!repassword && !errors.repassword;
+  useEffect(() => {
+    setCodeVerify(false);
+    setCodeError("");
+  }, [watchedCode, watchedEmail]);
+
+  useEffect(() => {
+    setSendCode(false);
+  }, [watchedEmail]);
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
